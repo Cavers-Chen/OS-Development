@@ -1,6 +1,6 @@
 # My OS-Development Note
 
-I followed this [tutorial](https://github.com/cfenollosa/os-tutorial).
+I followed this [document](https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf) + [tutorial](https://github.com/cfenollosa/os-tutorial).
 
 Enverionment: 
 * Ubuntu20.03
@@ -11,7 +11,7 @@ Enverionment:
 
 At the beginning, computer need to boot firstly. And of course, there is a way for computer do achieve this goal.
 
-Computer will use BIOS to check if it is 0XAA55 at the bytes 511 and 512. If it is, then I say this computer is "bootable".
+Computer will use BIOS to check if it is 0XAA55 at the bytes 511 and 512. If it is, then we say this computer is "bootable".
 
 At the meantime, before 0XAA55, those codes would be boot code.
 
@@ -67,4 +67,50 @@ dw 0xaa55
 
 This time, when computer boot, you will see "Cavers"
 
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|                                       |
+|                                       |
+|                                       |
+|               FREE                    |
+|                                       |
+|                                       |
+|_______________________________________|<--0x100000
+|            BIOS(256KB)                |
+|_______________________________________|<--0xC0000
+|         Video Memory(128KB)           |
+|_______________________________________|<--0xA0000
+|      Extended BIOS Data Area(638KB)   |
+|_______________________________________|<--0x9FC00
+|              Free(638KB)              |
+|_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|<--0x7E00
+|      Loaded Boot Sector(512 Bytes)    |
+|_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|<--0x7C00
+|                                       |
+|_______________________________________|<--0x500
+|         BIOS Data Area(256Bytes)      |
+|_______________________________________|<--0x400
+|      Interrupt Vector Table(1KB)      |
+|_______________________________________|<--0x0
 
+```
+
+
+```
+je target ; jump if equal ( i.e. x == y )
+
+jne target ; jump if not equal ( i.e. x != y )
+
+jl target ; jump if less than ( i.e. x < y )
+
+jle target ; jump if less than or equal ( i.e. x <= y )
+
+jg target ; jump if greater than ( i.e. x > y )
+
+jge target ; jump if greater than or equal ( i.e. x >= y )
+```
+
+
+es ds cs ss
+
+es:[address]/address before setting ds
