@@ -110,7 +110,12 @@ jg target ; jump if greater than ( i.e. x > y )
 jge target ; jump if greater than or equal ( i.e. x >= y )
 ```
 
-
 es ds cs ss
 
 es:[address]/address before setting ds
+
+Next, we need to load our disk content to our computer. How to do this? Computer will scan the disk 512KB per sector, and of course, powerful BIOS will help us to deal with this problem. We can use the regular disk scanning scheme which is already defined in BIOS by using interrupt features.
+
+Because our boot program is written on the first sector of our boot disk, so we need to change our segment registers to access higher physical address. And use interrupt features to let computer to scan right sector with CHS scheme(Cylinder Header Sector).
+
+After that, we can alter real mode to protected mode. As a result, we are able to use 32 or even 64 mode.
